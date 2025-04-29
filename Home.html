@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Log Analyzer Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f6fa;
+    }
+
+    .header {
+      background-color: #4a4e69;
+      color: white;
+      padding: 20px 0;
+    }
+
+    .navbar-brand {
+      font-size: 24px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .navbar-nav .nav-link {
+      color: white !important;
+      font-weight: 500;
+      margin-left: 15px;
+    }
+
+    .device-card {
+      border-radius: 16px;
+      height: 360px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .device-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .device-image-section {
+      flex: 0 0 45%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #eef0f7;
+    }
+
+    .device-info-section {
+      flex: 1;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .device-image {
+      width: 85px;
+      height: auto;
+    }
+
+    .status-badge {
+      font-size: 0.85rem;
+      padding: 0.4rem 0.6rem;
+      border-radius: 12px;
+      width: fit-content;
+    }
+
+    .status-normal {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .status-risk {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+
+    .view {
+      background: linear-gradient(135deg, #e0e7ff, #edf2fb);
+      padding: 40px 60px;
+      border-radius: 20px;
+      margin: 40px 90px 20px;
+    }
+
+    .view h1 {
+      font-size: 35px;
+      font-weight: 600;
+    }
+
+    .view h2 {
+      font-size: 25px;
+      font-weight: 500;
+      color: #4a4e69;
+    }
+
+    .devices {
+      text-align: left;
+      margin-left: 90px;
+      font-size: 28px;
+      font-weight: 600;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header with Navbar -->
+  <nav class="navbar navbar-expand-lg header">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="#">Log Analyzer</a>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tool.html">Download Tool</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Overview -->
+  <div class="view">
+    <h1>Overview</h1>
+    <h2>Welcome Back, Mohamed</h2>
+  </div>
+<br>
+  <div class="devices">
+    <p>Number Of Registered Devices (4)</p>
+  </div>
+
+  <!-- Devices Grid -->
+  <div class="container my-5">
+    <div class="row g-4">
+      <!-- Device Box 1 -->
+      <div class="col-md-6">
+        <a href="device.html" class="device-card card">
+          <div class="device-image-section">
+            <img src="https://img.icons8.com/ios-filled/100/000000/laptop.png" class="device-image" alt="Device" />
+          </div>
+          <div class="device-info-section">
+            <h6>Device A</h6>
+            <h6>IP: 192.168.0.101</h6>
+            <h6>MAC: AA:BB:CC:DD:EE:01</h6>
+            <span class="status-badge status-normal">Normal</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Device Box 2 -->
+      <div class="col-md-6">
+        <a href="device.html" class="device-card card">
+          <div class="device-image-section">
+            <img src="https://img.icons8.com/ios-filled/100/000000/laptop.png" class="device-image" alt="Device" />
+          </div>
+          <div class="device-info-section">
+            <h6>Device B</h6>
+            <h6>IP: 10.0.0.55</h6>
+            <h6>MAC: 11:22:33:44:55:66</h6>
+            <span class="status-badge status-risk">Risk</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Device Box 3 -->
+      <div class="col-md-6">
+        <a href="device.html" class="device-card card">
+          <div class="device-image-section">
+            <img src="https://img.icons8.com/ios-filled/100/000000/laptop.png" class="device-image" alt="Device" />
+          </div>
+          <div class="device-info-section">
+            <h6>Device C</h6>
+            <h6>IP: 172.16.23.8</h6>
+            <h6>MAC: 77:88:99:AA:BB:CC</h6>
+            <span class="status-badge status-normal">Normal</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Device Box 4 -->
+      <div class="col-md-6">
+        <a href="device.html" class="device-card card">
+          <div class="device-image-section">
+            <img src="https://img.icons8.com/ios-filled/100/000000/laptop.png" class="device-image" alt="Device" />
+          </div>
+          <div class="device-info-section">
+            <h6>Device D</h6>
+            <h6>IP: 192.168.1.42</h6>
+            <h6>MAC: DE:AD:BE:EF:CA:FE</h6>
+            <span class="status-badge status-risk">Risk</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+<!-- Footer -->
+<footer class="footer mt-5 py-3" style="background-color: #4a4e69; color: white;">
+    <div class="container text-center">
+      <span>&copy; 2025 Log Analyzer. All rights reserved.</span>
+    </div>
+  </footer>
+  
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

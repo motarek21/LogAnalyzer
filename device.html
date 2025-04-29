@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Device Details</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet"/>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f4f6fa;
+    }
+
+    .header, .footer {
+      background-color: #4a4e69;
+      color: white;
+    }
+
+    .navbar-brand {
+      font-size: 24px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .nav-link {
+      color: white !important;
+      font-weight: 500;
+      margin-left: 15px;
+    }
+
+    .view {
+      background: linear-gradient(135deg, #e0e7ff, #edf2fb);
+      padding: 40px 60px;
+      border-radius: 20px;
+      margin: 40px 90px 20px;
+    }
+
+    .view h1 {
+      font-size: 32px;
+      font-weight: 600;
+    }
+
+    .chart-container {
+      margin: 30px 0;
+    }
+
+    .status-anomaly {
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+    }
+
+    .status-normal {
+      background-color: #d4edda;
+      color: #155724;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+    }
+
+    .footer {
+      padding: 15px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg header">
+    <div class="container-fluid px-4">
+      <a class="navbar-brand" href="#">Log Analyzer</a>
+      <div class="collapse navbar-collapse justify-content-end">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tool.html">Download Tool</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Overview Section -->
+  <div class="view">
+    <h1>Device Details</h1>
+    <p>Analyzing Device: <strong>Device A</strong></p>
+  </div>
+  <br><br>
+  <!-- Charts Section -->
+  <div class="container chart-container">
+    <div class="row">
+      <div class="col-md-6">
+        <canvas id="pieChart"></canvas>
+      </div>
+      <div class="col-md-6">
+        <canvas id="barChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logs Table -->
+  <div class="container my-5">
+    <h4 class="mb-4">Device Logs</h4>
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover bg-white">
+        <thead class="table-light">
+          <tr>
+            <th>Device Name</th>
+            <th>IP Address</th>
+            <th>Log ID</th>
+            <th>Time</th>
+            <th>Log</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="logTableBody">
+          <!-- JS will fill this with real data -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer text-center">
+    <div class="container">
+      <span>&copy; 2025 Log Analyzer. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Chart.js Scripts -->
+  <script>
+    // Pie Chart for Log Type Distribution
+    const pieChart = new Chart(document.getElementById("pieChart"), {
+      type: "pie",
+      data: {
+        labels: ["Anomaly Logs", "Normal Logs"],
+        datasets: [{
+          label: "Logs",
+          data: [35, 120],
+          backgroundColor: ["#dc3545", "#28a745"]
+        }]
+      },
+      options: {
+        responsive: true
+      }
+    });
+
+    // Bar Chart for Log Frequency Example
+    const barChart = new Chart(document.getElementById("barChart"), {
+      type: "bar",
+      data: {
+        labels: ["12PM", "1PM", "2PM", "3PM", "4PM"],
+        datasets: [{
+          label: "Logs per Hour",
+          data: [5, 12, 8, 15, 9],
+          backgroundColor: "#4a4e69"
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    // Example Table Data (To be fetched from DB)
+    const logs = [
+      { name: "Device A", ip: "192.168.0.101", id: "LOG123", time: "2025-04-29 12:45", message: "Port scan detected", status: "Anomaly" },
+      { name: "Device A", ip: "192.168.0.101", id: "LOG124", time: "2025-04-29 13:05", message: "Normal access", status: "Non Anomaly" },
+      { name: "Device A", ip: "192.168.0.101", id: "LOG125", time: "2025-04-29 13:25", message: "Suspicious login", status: "Anomaly" },
+      { name: "Device A", ip: "192.168.0.101", id: "LOG126", time: "2025-04-29 14:10", message: "System heartbeat", status: "Non Anomaly" },
+    ];
+
+    const tableBody = document.getElementById("logTableBody");
+    logs.forEach(log => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${log.name}</td>
+        <td>${log.ip}</td>
+        <td>${log.id}</td>
+        <td>${log.time}</td>
+        <td>${log.message}</td>
+        <td><span class="${log.status === 'Anomaly' ? 'status-anomaly' : 'status-normal'}">${log.status}</span></td>
+      `;
+      tableBody.appendChild(row);
+    });
+  </script>
+</body>
+</html>
